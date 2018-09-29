@@ -70,9 +70,7 @@ class OAuthRequest {
 
           // If there are parameters in $_POST, these are likely what will be used. Therefore, they should be considered
           // the final value in the case of any duplicates from sources parsed above.
-          foreach ($_POST as $key => $value) {
-              $parameters[$key] = OAuthUtil::urldecode_rfc3986($value);
-          }
+          $parameters = array_merge($parameters, $_POST);
       }
 
       return new OAuthRequest($http_method, $http_url, $parameters);
