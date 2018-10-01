@@ -17,7 +17,6 @@ class OAuthRequest {
     // for debug purposes
     public $base_string;
     public static $version = '1.0';
-    public static $POST_INPUT = 'php://input';
 
     function __construct($http_method, $http_url, $parameters = null) {
 
@@ -61,8 +60,7 @@ class OAuthRequest {
               $parameters = array();
           }
 
-          // We have a Authorization-header with OAuth data. Parse the header
-          // and add those overriding any duplicates from GET or POST
+          // We have a Authorization-header with OAuth data. Parse the header and add those.
           if (isset($request_headers['Authorization']) && substr($request_headers['Authorization'], 0, 6) == 'OAuth ') {
               $header_parameters = OAuthUtil::split_header($request_headers['Authorization']);
               $parameters = array_merge($parameters, $header_parameters);
