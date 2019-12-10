@@ -13,6 +13,15 @@ namespace IMSGlobal\LTI\ToolProvider;
  */
 class Outcome
 {
+/**
+ * Text Data Type
+ */
+    const DATA_TYPE_TEXT = 'text';
+
+/**
+ * Url Data Type
+ */
+    const DATA_TYPE_URL = 'url';
 
 /**
  * Language value.
@@ -53,17 +62,33 @@ class Outcome
     private $value = null;
 
 /**
+ * Data value.
+ *
+ * @var string $data
+ */
+    private $data = null;
+
+/**
+ * Data Type value.
+ *
+ * @var string $dataType
+ */
+    private $dataType = null;
+
+/**
  * Class constructor.
  *
  * @param string $value     Outcome value (optional, default is none)
  */
-    public function __construct($value = null)
+    public function __construct($value = null, $data = null)
     {
 
         $this->value = $value;
         $this->language = 'en-US';
         $this->date = gmdate('Y-m-d\TH:i:s\Z', time());
         $this->type = 'decimal';
+        $this->data = $data;
+        $this->dataType = self::DATA_TYPE_TEXT;
 
     }
 
@@ -88,6 +113,53 @@ class Outcome
     {
 
         $this->value = $value;
+
+    }
+
+/**
+ * Get the data value.
+ *
+ * @return string Data value
+ */
+    public function getData()
+    {
+
+        return $this->data;
+
+    }
+
+/**
+ * Set the data value.
+ *
+ * @param string $data  Data value
+ */
+    public function setData($data)
+    {
+
+        $this->data = $data;
+
+    }
+/**
+ * Get the dataType value.
+ *
+ * @return string DataType value
+ */
+    public function getDataType()
+    {
+
+        return $this->dataType;
+
+    }
+
+/**
+ * Set the dataType value.
+ *
+ * @param string $dataType  DataType value
+ */
+    public function setDataType($dataType)
+    {
+
+        $this->dataType = $dataType;
 
     }
 
