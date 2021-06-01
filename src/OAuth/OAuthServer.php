@@ -14,7 +14,7 @@ class OAuthServer {
     protected $timestamp_threshold = 300; // in seconds, five minutes
     protected $version = '1.0';             // hi blaine
     protected $signature_methods = array();
-
+    public    $validSignature = false;
     protected $data_store;
 
     function __construct($data_store) {
@@ -193,8 +193,11 @@ class OAuthServer {
 
         $signature = $request->get_parameter('oauth_signature');
         $valid_sig = $signature_method->check_signature($request, $consumer, $token, $signature);
-
-        if (!$valid_sig) {
+        if ($valid_sig) {
+            $this->validSignature = true;
+        }
+        else{
+            //throw new \Exception("Invalid signature");
             throw new OAuthException('Invalid signature');
         }
     }
