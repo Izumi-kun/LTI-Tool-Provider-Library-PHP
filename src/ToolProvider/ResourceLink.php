@@ -591,13 +591,22 @@ class ResourceLink
             if ($urlLTI11) {
                 $xml = '';
                 if ($action === self::EXT_WRITE) {
+                    if(!empty($ltiOutcome->getData())) {
+                        $xml = <<<EOF
+
+          <resultData>
+            <{$ltiOutcome->getDataType()}>{$ltiOutcome->getData()}</{$ltiOutcome->getDataType()}>
+          </resultData>
+EOF;
+                    }
+
                     $xml = <<<EOF
 
         <result>
           <resultScore>
             <language>{$ltiOutcome->language}</language>
             <textString>{$value}</textString>
-          </resultScore>
+          </resultScore>{$xml}
         </result>
 EOF;
                 }
